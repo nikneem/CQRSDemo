@@ -1,0 +1,37 @@
+.transaction-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  .transaction {
+    display: flex;
+    flex-flow: column;
+    background: #aaa;
+    border-radius: 20px;
+    padding: 20px;
+    width: 720px;
+    .field {
+      display: flex;
+      flex-flow: row;
+      margin-bottom: 0.5rem;
+      .label {
+        flex: 1 1 33%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 1rem;
+      }
+      .control {
+        flex: 2 2 66%;
+      }
+    }
+    .controls {
+      flex: 3 3 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+}

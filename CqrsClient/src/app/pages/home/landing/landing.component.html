@@ -1,0 +1,68 @@
+<div class="transaction-container" *ngIf="transactionForm">
+  <div class="transaction">
+    <form [formGroup]="transactionForm">
+      <div class="field">
+        <div class="label">
+          From account number
+        </div>
+        <div class="control">
+          <input type="text" pInputText formControlName="fromAccountNumber" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          From account name
+        </div>
+        <div class="control">
+          <input type="text" pInputText formControlName="fromAccountHolder" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          To account number
+        </div>
+        <div class="control">
+          <input type="text" pInputText formControlName="toAccountNumber" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          To account name
+        </div>
+        <div class="control">
+          <input type="text" pInputText formControlName="toAccountHolder" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          Amount
+        </div>
+        <div class="control">
+          <input type="text" pInputText formControlName="amount" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          Description
+        </div>
+        <div class="control">
+          <input type="text" pInputText formControlName="description" />
+        </div>
+      </div>
+      <div class="controls">
+        <button
+          pButton
+          type="button"
+          label="Transfer!"
+          [disabled]="
+            transactionForm.valid && !transactionForm.pristine
+              ? null
+              : 'disabled'
+          "
+          (click)="createTransaction()"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast></p-toast>

@@ -25,6 +25,7 @@ namespace HexMaster.Transactions.AspNetCore.Controllers
         {
             if (ModelState.IsValid)
             {
+                dto.TransactionOn = DateTimeOffset.UtcNow;
                 var messageBody = JsonConvert.SerializeObject(dto);
                 var message = new Message(Encoding.UTF8.GetBytes(messageBody));
                 await _queueClient.SendAsync(message);

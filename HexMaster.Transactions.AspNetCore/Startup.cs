@@ -35,7 +35,6 @@ namespace HexMaster.Transactions.AspNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             var eventBusSection = Configuration.GetSection(EventBusConfiguration.SettingName);
             services.Configure<EventBusConfiguration>(eventBusSection);
             var eventBusSettings = eventBusSection.Get<EventBusConfiguration>();
@@ -44,7 +43,19 @@ namespace HexMaster.Transactions.AspNetCore
             ConfigureEventBus(services, eventBusSettings);
             RegisterEventBus(services, eventBusSettings);
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder
+                        .SetIsOriginAllowed((host)=> true)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                    );
+
+            });
             services.AddSignalR();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
@@ -67,6 +78,7 @@ namespace HexMaster.Transactions.AspNetCore
             }
             ConfigureEventBus(app);
             app.UseHttpsRedirection();
+            app.UseCors("AllowOrigin");
             app.UseSignalR(routes =>
             {
                 routes.MapHub<TransactionsHub>("/hubs/transactions");
