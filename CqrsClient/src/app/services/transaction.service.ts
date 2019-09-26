@@ -11,7 +11,7 @@ export class TransactionService {
 
   public createTransaction(dto: CreateTransactionDto): Observable<boolean> {
     return this.http.post<boolean>(
-      'https://localhost:44340/api/transactions',
+      'https://localhost:5003/api/transactions',
       dto
     );
   }

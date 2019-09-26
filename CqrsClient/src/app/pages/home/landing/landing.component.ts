@@ -40,7 +40,7 @@ export class LandingComponent implements OnInit {
   public connectToSignalR() {
     const self = this;
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`https://localhost:44340/hubs/transactions`)
+      .withUrl(`https://localhost:5003/hubs/transactions`)
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
